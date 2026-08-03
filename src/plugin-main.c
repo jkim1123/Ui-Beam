@@ -17,18 +17,16 @@ with this program. If not, see <https://www.gnu.org/licenses/>
 */
 
 #include <obs-module.h>
-#include <plugin-support.h>
+#include "plugin-support.h"
 
-#include <hotkey.h>
-#include <dump_buffer.h>
-#include <output.h>
+#include "hotkey.h"
+#include "output.h"
 OBS_DECLARE_MODULE()
 OBS_MODULE_USE_DEFAULT_LOCALE(PLUGIN_NAME, "en-US")
 
 bool obs_module_load(void)
 {
 	obs_log(LOG_INFO, "UI-Beam loaded");
-	dump_buffer_init();
 	output_init();
 	register_hotkeys();
 	return true;
@@ -37,6 +35,5 @@ bool obs_module_load(void)
 void obs_module_unload(void)
 {	
 	output_shutdown();
-	dump_buffer_destroy();
 	obs_log(LOG_INFO, "plugin unloaded");
 }
